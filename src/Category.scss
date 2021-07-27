@@ -47,6 +47,14 @@
     }
   }
 
+  #{$block}__productlist_qty_addtocart {
+    width: 100%;
+    display: table;
+    #{$block}__productlist_qty_addtocart__product {
+      display: table-row;
+    }
+  }
+
   #{$block}__pagination {
     flex: 0 0 60px;
     display: flex;

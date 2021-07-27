@@ -1,7 +1,7 @@
 @import './theme/common';
 
 .availability {
-  display: inline-block;
+  display: table-cell;
   margin-top: 10px;
   text-transform: uppercase;
   font-size: $sizeXXSmall;

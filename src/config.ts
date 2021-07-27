@@ -5,7 +5,7 @@ const splitCompareKeys = (keyStr: string) =>
     .map(subStr => subStr.split(','));
 
 export const config = {
-  clientId: process.env.REACT_APP_CLIENT_ID || '1NgdZlkNCJ5miRkpQ0ly75HOZOFM0rKf2taUujquog',
+  clientId: process.env.REACT_APP_CLIENT_ID || 'iDcHhzof3PqOUuF0n9QPaaSFIoIUBms7H0yPaC2bkj',
   stripeKey: process.env.REACT_APP_STRIPE_KEY || 'pk_test_JwRX4cevuCysIEQrpwcbn3j8',
   categoryPageSize: 52,
   maxCompareProducts: 4,

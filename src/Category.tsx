@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as moltin from '@moltin/sdk';
 import { loadCategoryProducts } from './service';
 import { useCategories, useTranslation, useCurrency } from './app-state';
-import { ProductThumbnail } from './ProductThumbnail';
+import { ProductThumbnailQtyAddToCart } from './ProductThumbnailQtyAddToCart';
 import { createCategoryUrl } from './routes';
 import { Pagination } from './Pagination';
 import { useResolve } from './hooks';
@@ -66,13 +66,13 @@ export const Category: React.FC = () => {
 
           <h1 className="category__categoryname">{category?.name ?? ' '}</h1>
 
-          <ul className="category__productlist">
+          <div className="category__productlist_qty_addtocart">
             {products && products.data.map(product => (
-              <li key={product.id} className="category__product">
-                <ProductThumbnail product={product} />
-              </li>
+              // <div className="category__productlist_qty_addtocart__product">
+                <ProductThumbnailQtyAddToCart product={product} />
+              // </div>
             ))}
-          </ul>
+          </div>
 
           <div className="category__pagination">
             {totalPages && (
