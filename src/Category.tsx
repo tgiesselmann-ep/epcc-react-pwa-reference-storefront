@@ -69,7 +69,7 @@ export const Category: React.FC = () => {
           <div className="category__productlist_qty_addtocart">
             {products && products.data.map(product => (
               // <div className="category__productlist_qty_addtocart__product">
-                <ProductThumbnailQtyAddToCart product={product} />
+                <ProductThumbnailQtyAddToCart product={product} key={product.id}/>
               // </div>
             ))}
           </div>
