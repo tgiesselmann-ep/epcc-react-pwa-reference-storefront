@@ -3,18 +3,33 @@
 .productthumbnail_qty_addtocart {
   $block: &;
 
-
-  text-align: left;
-  //margin-bottom: 40px;
-  display: table-row;
-  border-top: 1px solid $mainBorderColor;
-  border-bottom: 1px solid $mainBorderColor;
+  width: 100%;
+  display: table;
+  #{$block}__productlist_qty_addtocart__product {
+    display: table-row;
+  }
   border-collapse: collapse;
+
+  
+  #{$block}__item {
+    text-align: left;
+    display: table-row;
+    //border-collapse: collapse;
+    border-top: 1px solid $mainBorderColor;
+    border-bottom: 1px solid $mainBorderColor;
+  }
+
+  #{$block}__bottom_row {
+    text-align: left;
+    display: table-row;
+  }
 
   #{$block}__imgcontainer {
     display: table-cell;
-    // width: 160px;
-    // height: 160px;
+  }
+
+  #{$block}__empty_cell {
+    display: table-cell;
   }
 
   #{$block}__quantity {
