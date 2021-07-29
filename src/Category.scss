@@ -33,6 +33,14 @@
     font-weight: bold;
   }
 
+  #{$block}__display_as_list {
+    flex: 0;
+    width: 100%;
+    text-align: right;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+
   #{$block}__productlist {
     width: 100%;
     flex: 1 1 auto;
@@ -45,15 +53,6 @@
       flex: 0 0 100%;
       text-align: center;
     }
-  }
-
-  #{$block}__productlist_qty_addtocart {
-    width: 100%;
-    display: table;
-    #{$block}__productlist_qty_addtocart__product {
-      display: table-row;
-    }
-    border-collapse: collapse;
   }
 
   #{$block}__pagination {

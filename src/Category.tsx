@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import * as moltin from '@moltin/sdk';
 import { loadCategoryProducts } from './service';
 import { useCategories, useTranslation, useCurrency } from './app-state';
+import { ProductThumbnail } from './ProductThumbnail';
 import { ProductThumbnailQtyAddToCartList } from './ProductThumbnailQtyAddToCartList';
 import { createCategoryUrl } from './routes';
 import { Pagination } from './Pagination';
@@ -48,6 +49,7 @@ export const Category: React.FC = () => {
   const pageNum = isNaN(parsedPageNum) ? 1 : parsedPageNum;
 
   const { products, totalPages } = useCategoryProducts(category?.id, pageNum);
+  const [displayAsList, setDisplayAsList] = useState(false);
 
   return (
     <div className="category">
@@ -65,8 +67,29 @@ export const Category: React.FC = () => {
           </div>
 
           <h1 className="category__categoryname">{category?.name ?? ' '}</h1>
-          
-          <ProductThumbnailQtyAddToCartList products={products.data}/>
+
+          <div className="category__display_as_list">
+            <label>
+              <input type="checkbox" checked={displayAsList}
+                onChange={(e) => setDisplayAsList(e.currentTarget.checked)}/>
+              <span> List View</span>
+            </label>
+          </div>
+
+          {displayAsList && (
+              <ProductThumbnailQtyAddToCartList products={products.data}/>
+          )}
+
+          {!displayAsList && (
+            <ul className="category__productlist">
+              {products && products.data.map(product => (
+                <li key={product.id} className="category__product">
+                  <ProductThumbnail product={product} />
+                </li>
+              ))}
+            </ul>
+          )}
+
 
           <div className="category__pagination">
             {totalPages && (
