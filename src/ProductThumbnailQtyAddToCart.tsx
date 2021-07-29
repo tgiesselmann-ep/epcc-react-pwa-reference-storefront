@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as moltin from '@moltin/sdk';
 import { createProductUrl } from './routes';
 import { Link } from 'react-router-dom';
-import { CompareCheck } from './CompareCheck';
+// import { CompareCheck } from './CompareCheck';
 import { ProductMainImage } from './ProductMainImage';
 import { isProductAvailable } from './helper';
 import { Availability } from './Availability';
@@ -13,7 +13,7 @@ import {
   useCartData,
   useMultiCartData
 } from "./app-state";
-import { addToCartWithQty, loadProductBySlug, getProductById } from './service';
+import { addToCartWithQty } from './service';
 
 import './ProductThumbnailQtyAddToCart.scss';
 
@@ -26,8 +26,8 @@ export const ProductThumbnailQtyAddToCart: React.FC<ProductThumbnailQtyAddToCart
   const productUrl = createProductUrl(props.product.slug);
   const { selectedLanguage } = useTranslation();
   const { selectedCurrency } = useCurrency();
-  const { updateCartItems, setCartQuantity, handleShowCartPopup } = useCartData();
-  const { multiCartData, updateCartData, updateSelectedCart, setIsCartSelected } = useMultiCartData();
+  const { updateCartItems } = useCartData();
+  const { updateCartData } = useMultiCartData();
 
   const [qty, setQty] = useState("");
 
