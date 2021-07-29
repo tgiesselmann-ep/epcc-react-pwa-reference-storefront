@@ -12,8 +12,9 @@
   border-collapse: collapse;
 
   #{$block}__imgcontainer {
-    width: 160px;
-    height: 160px;
+    display: table-cell;
+    // width: 160px;
+    // height: 160px;
   }
 
   #{$block}__quantity {
@@ -60,6 +61,7 @@
     font-weight: bold;
     text-align: right;
     width: 8em;
+    padding-right: 1em;
   }
 
   #{$block}__sku {
@@ -82,20 +84,20 @@
   }
 
   .productmainimage {
-    height: 160px;
-    width: 160px;
+    // height: 160px;
+    width: 60px;
     border: 1px solid $secondBorderColor;
   }
 
   @media (min-width: $tabletSmallWidth) {
     #{$block}__imgcontainer {
-      width: 180px;
-      height: 180px;
+      //height: 60px;
+      width: 60px;
     }
 
     .productmainimage {
-      height: 180px;
-      width: 180px;
+      //height: 60px;
+      width: 60px;
     }
   }
 }

@@ -48,11 +48,11 @@ export const ProductThumbnailQtyAddToCart: React.FC<ProductThumbnailQtyAddToCart
 
   return (
     <div className="productthumbnail_qty_addtocart">
-      {/* <div className="productthumbnail_qty_addtocart__imgcontainer">
+      <div className="productthumbnail_qty_addtocart__imgcontainer">
         <Link className="productthumbnail__imglink" to={productUrl} aria-label={props.product.name}>
           <ProductMainImage product={props.product} />
         </Link>
-      </div> */}
+      </div>
       <div className="productthumbnail_qty_addtocart__quantity">
         <input className="productthumbnail_qty_addtocart__epform__input" id={props.product.id} type="text" value={qty}
           onChange={(e) => {handleChange(e.target.value)}}/>
