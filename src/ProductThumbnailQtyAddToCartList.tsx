@@ -26,7 +26,7 @@ export const ProductThumbnailQtyAddToCartList: React.FC<ProductThumbnailQtyAddTo
   const { t, selectedLanguage } = useTranslation();
   const { selectedCurrency } = useCurrency();
   const { updateCartItems } = useCartData();
-  const { multiCartDataList, multiCartData, updateCartData } = useMultiCartData();
+  const { multiCartDataList, updateCartData } = useMultiCartData();
   const { isLoggedIn } = useCustomerData();
   const [productQuantities, setProductQuantities] = useState(new Map<string, string>());
   const [dropdownOpen, setDropdownOpen] = useState(false);
