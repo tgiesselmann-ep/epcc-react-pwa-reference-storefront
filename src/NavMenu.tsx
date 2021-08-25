@@ -1,8 +1,10 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { createCategoryUrl } from './routes';
+import { createCategoryUrl, createNodeUrl } from './routes';
 import * as moltin from '@moltin/sdk';
-import { useCategories } from './app-state';
+import { useCategories, useNodes, useTranslation } from './app-state';
+import { loadNodes } from './service';
 
 import './NavMenu.scss';
 
@@ -15,6 +17,8 @@ interface NavMenuProps {
 export const NavMenu: React.FC<NavMenuProps> = (props) => {
   const { handleCloseNavigation, categoryHistory, handleCategoryClick } = props;
   const { categoriesTree } = useCategories();
+  const { selectedLanguage } = useTranslation();
+  const { nodes } = useNodes();
 
   const handleCloseMenu = () => {
     handleCloseNavigation();
@@ -47,6 +51,17 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
   return (
     <div className="navmenu">
       {categoriesTree && renderCategories(categoriesTree)}
+      {nodes && nodes.map((node: moltin.Node) => (
+        // <div>{node.attributes.name}</div>
+        <Link
+        onClick={handleCloseMenu}
+        // className={`navmenu__link ${node.children ? '--haschildren' : ''}`}
+        className={`navmenu__link`}
+        to={createNodeUrl('' + node.attributes.slug)}
+      >
+        {node.attributes.name}
+      </Link>
+      ))}
     </div>
   );
 };

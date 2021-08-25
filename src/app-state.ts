@@ -14,7 +14,8 @@ import {
   editCartInfo,
   addCustomerAssociation,
   loadCustomerAuthenticationSettings,
-  loadOidcProfiles
+  loadOidcProfiles,
+  loadNodes
 } from './service';
 
 import { config } from './config';
@@ -183,7 +184,7 @@ function useAddressDataState() {
   const token = localStorage.getItem('mtoken') || '';
   const id = localStorage.getItem('mcustomer') || '';
 
-  const [addressData, setAddressData] = useState<moltin.Address[]>([]);
+  const [addressData, setAddressData] = useState<moltin.CustomerAddress[]>([]);
 
   useEffect(() => {
     if (token) {
@@ -355,6 +356,22 @@ function useCategoriesState(selectedLanguage: string) {
   return {
     categoriesTree,
     categoryPathBySlug,
+  };
+}
+
+function useNodesState(selectedLanguage: string) {
+  const [nodes, setNodes] = useState<moltin.Node[]>();
+
+  useEffect(() => {
+    setNodes(undefined);
+
+    loadNodes(selectedLanguage).then(result => {
+      setNodes(result);
+    }).catch(err=>console.error(err));
+  }, [selectedLanguage]);
+
+  return {
+    nodes
   };
 }
 
@@ -656,6 +673,7 @@ function useGlobalState() {
     categories: useCategoriesState(translation.selectedLanguage),
     compareProducts: useCompareProductsState(),
     authenticationSettings: useCustomerAuthenticationSettingsState(),
+    nodes: useNodesState(translation.selectedLanguage)
   };
 }
 
@@ -671,6 +689,7 @@ export const [
   useCustomerAuthenticationSettings,
   useCartData,
   useMultiCartData,
+  useNodes,
 ] = constate(
   useGlobalState,
   value => value.translation,
@@ -683,4 +702,5 @@ export const [
   value => value.authenticationSettings,
   value => value.cartData,
   value => value.multiCartData,
+  value => value.nodes,
 );

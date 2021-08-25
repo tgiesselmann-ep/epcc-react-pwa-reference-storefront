@@ -45,6 +45,13 @@ export async function loadCategoryTree(language: string): Promise<moltin.Categor
   return result.data;
 }
 
+export async function loadNodes(language: string): Promise<moltin.Node[]> {
+  const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId, language });
+  const result = await moltin.Catalog.Nodes.All();
+
+  return result.data;
+}
+
 const productCache: { [id: string]: moltin.Product } = {};
 
 function setProductCache(key: string, language: string, currency: string, product: moltin.Product) {
@@ -173,28 +180,28 @@ export async function updateCustomer(id: string, name: string, email: string, to
   return result;
 }
 
-export async function getAddresses(customer: string, token: string): Promise<{ data: moltin.Address[] }> {
+export async function getAddresses(customer: string, token: string): Promise<{ data: moltin.CustomerAddress[] }> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
-  const result = await moltin.Addresses.All({ customer, token });
+  const result = await moltin.CustomerAddresses.All({ customer, token });
 
   return result;
 }
 
 export async function updateAddress(customer: string, address: string, body: any, token: string): Promise<void> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
-  await moltin.Addresses.Update({ customer, address, body, token });
+  await moltin.CustomerAddresses.Update({ customer, address, body, token });
 }
 
-export async function addNewAddress(customer: string, body: any, token: string): Promise<{ data: moltin.Address }> {
+export async function addNewAddress(customer: string, body: any, token: string): Promise<{ data: moltin.CustomerAddress }> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
-  const result = await moltin.Addresses.Create({ customer, body, token });
+  const result = await moltin.CustomerAddresses.Create({ customer, body, token });
 
   return result;
 }
 
 export async function deleteAddress(customer: string, address: any, token: string): Promise<void> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
-  await moltin.Addresses.Delete({ customer, address, token });
+  await moltin.CustomerAddresses.Delete({ customer, address, token });
 }
 
 export async function getAllOrders(token: string, pageNum:number,dates: number, sort?:any ): Promise<{ data: moltin.Order[] }> {

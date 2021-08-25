@@ -68,7 +68,7 @@ export const Address: React.FC = () => {
       <h1 className="address__title">{t("address-book")}</h1>
       {addressData && addressData.length > 0 ? (
         <div className="address__maincontainer">
-          {addressData.map((address: moltin.Address) => (
+          {addressData.map((address: moltin.CustomerAddress) => (
             <div className="address__container" key={address.id}>
               <ul className="address__list">
                 <li className="">

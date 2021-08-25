@@ -138,7 +138,7 @@ export const AddressFields: React.FC<CheckoutParams> = (props) => {
         {!editing && addressData && addressData.length > 0 && (
           <React.Fragment>
             <div className="address__wrap">
-              {addressData.map((address: moltin.Address, index:number) => (
+              {addressData.map((address: moltin.CustomerAddress, index:number) => (
                 <div className="address__container" key={address.id}>
                   <input type="radio" name="addressCheck" id={`address_${index}`} className="epradio" defaultChecked={checkedItem === index} onChange={() => {handleCheckAddress(address, index)}} />
                   <label htmlFor={`address_${index}`}>

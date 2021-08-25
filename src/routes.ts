@@ -31,6 +31,7 @@ interface RouteConfig {
 export const routes: RouteConfig[] = [
   { exact: true, path: '/', component: Home, },
   { exact: true, path: '/category/:categorySlug/:pageNum?', component: Category, },
+  { exact: true, path: '/node/:nodeSlug/:pageNum?', component: Category, },
   { exact: true, path: '/product/:productSlug', component: Product, },
   { exact: true, path: '/aboutus', component: AboutUs, },
   { exact: true, path: '/contactus', component: ContactUs, },
@@ -69,6 +70,10 @@ export function createOrderDetailsUrl () {
 
 export function createCategoryUrl(categorySlug: string, pageNum?: number): string {
   return `/category/${categorySlug}${pageNum && pageNum > 1 ? `/${pageNum}` : ''}`;
+}
+
+export function createNodeUrl(nodeSlug: string, pageNum?: number): string {
+  return `/node/${nodeSlug}${pageNum && pageNum > 1 ? `/${pageNum}` : ''}`;
 }
 
 export function createProductUrl(productSlug: string): string {
