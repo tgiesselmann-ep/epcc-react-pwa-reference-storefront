@@ -1,4 +1,6 @@
 import * as moltin from '@moltin/sdk';
+import { ResourceList } from '@moltin/sdk';
+import { ProductResponse } from '@moltin/sdk/src/types/catalogs-products';
 import {config} from './config';
 
 const MoltinGateway = moltin.gateway;
@@ -49,6 +51,7 @@ export async function loadNodes(language: string): Promise<moltin.Node[]> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId, language });
   const result = await moltin.Catalog.Nodes.All();
 
+  // something
   return result.data;
 }
 
@@ -80,6 +83,22 @@ export async function loadCategoryProducts(categoryId: string, pageNum: number, 
   for (const product of result.data) {
     setProductCache(product.id, language, currency, product);
   }
+
+  return result;
+}
+
+export async function loadNodeProducts(nodeId: string, pageNum: number, language: string, currency: string): Promise<ResourceList<ProductResponse>> {
+  const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId, language, currency });
+
+  const result = await moltin.Catalog.Products
+    .Offset((pageNum - 1) * config.categoryPageSize)
+    .Limit(config.categoryPageSize)
+    .GetProductsByNode({ nodeId });
+
+  // TODO – add caching for PCM products ...
+  // for (const product of result.data) {
+  //   setProductCache(product.id, language, currency, product);
+  // }
 
   return result;
 }

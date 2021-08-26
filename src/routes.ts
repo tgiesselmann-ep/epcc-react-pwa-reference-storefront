@@ -21,6 +21,7 @@ import { OrderDetails } from './OrderDetails';
 import { Orders } from './Orders';
 import { BulkOrder } from './BulkOrder';
 import { QuickOrder } from './QuickOrder';
+import { Node } from './Node';
 
 interface RouteConfig {
   path: string;
@@ -31,7 +32,7 @@ interface RouteConfig {
 export const routes: RouteConfig[] = [
   { exact: true, path: '/', component: Home, },
   { exact: true, path: '/category/:categorySlug/:pageNum?', component: Category, },
-  { exact: true, path: '/node/:nodeSlug/:pageNum?', component: Category, },
+  { exact: true, path: '/node/:nodeSlug/:pageNum?', component: Node, },
   { exact: true, path: '/product/:productSlug', component: Product, },
   { exact: true, path: '/aboutus', component: AboutUs, },
   { exact: true, path: '/contactus', component: ContactUs, },

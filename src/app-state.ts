@@ -367,7 +367,9 @@ function useNodesState(selectedLanguage: string) {
 
     loadNodes(selectedLanguage).then(result => {
       setNodes(result);
-    }).catch(err=>console.error(err));
+    }).catch((err) => {
+      console.error(err)
+    });
   }, [selectedLanguage]);
 
   return {
