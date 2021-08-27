@@ -34,11 +34,9 @@ export const PcmProductThumbnail: React.FC<PcmProductThumbnailProps> = (props) =
         {props.product.attributes.sku}
       </div>
       <div className="productthumbnail__price">
-        {/* TODO */}
-        {/* {props.product.meta.display_price.without_tax.formatted} */}
+        {props.product.meta.display_price.without_tax.formatted}
       </div>
-      {/* TODO */}
-      {/* <Availability available={isProductAvailable(props.product)}/> */}
+      <Availability available={isProductAvailable(props.product)}/>
       {/* TODO (meh) */}
       {/* <div className={`productthumbnail__comparecheck`}>
         <CompareCheck product={props.product} />
