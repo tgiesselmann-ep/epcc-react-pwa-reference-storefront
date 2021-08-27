@@ -3,7 +3,7 @@ import * as moltin from '@moltin/sdk';
 import { createProductUrl } from './routes';
 import { Link } from 'react-router-dom';
 import { CompareCheck } from './CompareCheck';
-import { ProductMainImage } from './ProductMainImage';
+import { PcmProductMainImage } from './PcmProductMainImage';
 import { isProductAvailable } from './helper';
 import { Availability } from './Availability';
 
@@ -12,7 +12,7 @@ import './ProductThumbnail.scss';
 
 
 interface PcmProductThumbnailProps {
-  product: moltin.PcmProductBase
+  product: any
 }
 
 export const PcmProductThumbnail: React.FC<PcmProductThumbnailProps> = (props) => {
@@ -22,7 +22,7 @@ export const PcmProductThumbnail: React.FC<PcmProductThumbnailProps> = (props) =
     <div className="productthumbnail">
       <div className="productthumbnail__imgcontainer">
         <Link className="productthumbnail__imglink" to={productUrl} aria-label={props.product.attributes.name}>
-          {/* <ProductMainImage product={props.product} /> */}
+          <PcmProductMainImage product={props.product} />
         </Link>
       </div>
       <div className="productthumbnail__name">
@@ -34,9 +34,12 @@ export const PcmProductThumbnail: React.FC<PcmProductThumbnailProps> = (props) =
         {props.product.attributes.sku}
       </div>
       <div className="productthumbnail__price">
-        {/* // TODO */}
+        {/* TODO */}
+        {/* {props.product.meta.display_price.without_tax.formatted} */}
       </div>
+      {/* TODO */}
       {/* <Availability available={isProductAvailable(props.product)}/> */}
+      {/* TODO (meh) */}
       {/* <div className={`productthumbnail__comparecheck`}>
         <CompareCheck product={props.product} />
       </div> */}

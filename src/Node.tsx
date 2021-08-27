@@ -48,14 +48,12 @@ export const Node: React.FC = () => {
   const filteredNodes = nodes ? nodes?.filter((n: moltin.Node) => { return n.attributes?.slug === params.nodeSlug }) : [];
   const node = filteredNodes[0];
 
-  //const { products/*, totalPages */} = useNodeProducts(node?.id, pageNum);
+  const { products/*, totalPages */} = useNodeProducts(node?.id, pageNum);
 
   return (
     <div className="category">
-      {node && node.attributes.name }
-      {//node && products ? (
-        true ? (
-        <>Moo
+      {node && products ? (
+        <>
           {/* <div className="category__breadcrumbs">
             {categoryPath?.map((category: moltin.Category, index: number) => (
               <React.Fragment key={category.id}>
@@ -67,7 +65,7 @@ export const Node: React.FC = () => {
             ))}
           </div> */}
 
-          {/* <h1 className="category__categoryname">{node.attributes.name ?? ' '}</h1>
+          <h1 className="category__categoryname">{node.attributes.name ?? ' '}</h1>
 
           <ul className="category__productlist">
             {products && products.data.map(product => (
@@ -75,7 +73,7 @@ export const Node: React.FC = () => {
                 <PcmProductThumbnail product={product} />
               </li>
             ))}
-          </ul> */}
+          </ul>
 
           {/* <div className="category__pagination">
             {totalPages && (
