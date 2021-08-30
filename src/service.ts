@@ -159,6 +159,32 @@ export async function loadProductBySlug(productSlug: string, language: string, c
   return product;
 }
 
+export async function loadPcmProductBySlug(productSlug: string, language: string, currency: string): Promise<any> {
+  // const cachedProduct = getProductCache(productSlug, language, currency);
+
+  // if (cachedProduct) {
+  //   return cachedProduct;
+  // }
+
+  const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId, language, currency });
+
+  const resultSlug = await moltin.Catalog.Products
+    .Limit(1)
+    .Filter({
+      eq: {
+        slug: productSlug
+      }
+    })
+    .All();
+
+  const productId: any = resultSlug?.data[0]?.id;
+  const result = await moltin.Catalog.Products.Get({ productId: productId });
+  const product: any = result.data;
+  //setProductCache(product.slug, language, currency, product);
+
+  return product;
+}
+
 export async function register(name: string, email: string, password: string): Promise<moltin.CustomerBase> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
   const { data } = await moltin.Customers.Create({
