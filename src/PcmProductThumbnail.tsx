@@ -1,6 +1,6 @@
 import React from 'react';
 import * as moltin from '@moltin/sdk';
-import { createProductUrl } from './routes';
+import { createPcmProductUrl } from './routes';
 import { Link } from 'react-router-dom';
 import { CompareCheck } from './CompareCheck';
 import { PcmProductMainImage } from './PcmProductMainImage';
@@ -16,7 +16,7 @@ interface PcmProductThumbnailProps {
 }
 
 export const PcmProductThumbnail: React.FC<PcmProductThumbnailProps> = (props) => {
-  const productUrl = createProductUrl('' + props.product.attributes.slug);
+  const productUrl = createPcmProductUrl('' + props.product.attributes.slug);
 
   return (
     <div className="productthumbnail">

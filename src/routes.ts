@@ -2,6 +2,7 @@ import React from 'react';
 import { Home } from './Home';
 import { Category } from './Category';
 import { Product } from './Product';
+import { PcmProduct } from './PcmProduct';
 import AboutUs from './AboutUs';
 import ContactUs from './ContactUs';
 import ShippingAndReturns from './ShippingAndReturns';
@@ -34,6 +35,7 @@ export const routes: RouteConfig[] = [
   { exact: true, path: '/category/:categorySlug/:pageNum?', component: Category, },
   { exact: true, path: '/node/:nodeSlug/:pageNum?', component: Node, },
   { exact: true, path: '/product/:productSlug', component: Product, },
+  { exact: true, path: '/pcm/product/:productSlug', component: PcmProduct, },
   { exact: true, path: '/aboutus', component: AboutUs, },
   { exact: true, path: '/contactus', component: ContactUs, },
   { exact: true, path: '/shippingreturns', component: ShippingAndReturns, },
@@ -79,6 +81,10 @@ export function createNodeUrl(nodeSlug: string, pageNum?: number): string {
 
 export function createProductUrl(productSlug: string): string {
   return `/product/${productSlug}`;
+}
+
+export function createPcmProductUrl(productSlug: string): string {
+  return `/pcm/product/${productSlug}`;
 }
 
 export function createCompareProductsUrl(): string {
