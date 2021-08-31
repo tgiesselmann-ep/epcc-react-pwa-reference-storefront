@@ -1,10 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { createCategoryUrl, createNodeUrl } from './routes';
 import * as moltin from '@moltin/sdk';
-import { useCategories, useNodes, useTranslation } from './app-state';
-import { loadNodes } from './service';
+import { useCategories, useNodes } from './app-state';
 
 import './NavMenu.scss';
 
@@ -17,7 +15,6 @@ interface NavMenuProps {
 export const NavMenu: React.FC<NavMenuProps> = (props) => {
   const { handleCloseNavigation, categoryHistory, handleCategoryClick } = props;
   const { categoriesTree } = useCategories();
-  const { selectedLanguage } = useTranslation();
   const { nodes } = useNodes();
 
   const handleCloseMenu = () => {

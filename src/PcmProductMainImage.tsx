@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import * as moltin from '@moltin/sdk';
 import { loadImageHref } from './service';
 import { useResolve } from './hooks';
 import { ImageContainer } from './ImageContainer';

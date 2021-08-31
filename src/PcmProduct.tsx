@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { useResolve, useProductImages } from './hooks';
-import { addToCart, loadProductBySlug, getProductById, loadPcmProductBySlug } from './service';
-import { CompareCheck } from './CompareCheck';
+import { addToCart, getProductById, loadPcmProductBySlug } from './service';
+//import { CompareCheck } from './CompareCheck';
 import { SocialShare } from './SocialShare';
 import {
   useTranslation,

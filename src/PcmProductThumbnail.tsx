@@ -1,8 +1,6 @@
 import React from 'react';
-import * as moltin from '@moltin/sdk';
 import { createPcmProductUrl } from './routes';
 import { Link } from 'react-router-dom';
-import { CompareCheck } from './CompareCheck';
 import { PcmProductMainImage } from './PcmProductMainImage';
 import { isProductAvailable } from './helper';
 import { Availability } from './Availability';

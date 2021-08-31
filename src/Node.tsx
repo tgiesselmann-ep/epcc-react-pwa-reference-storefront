@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import * as moltin from '@moltin/sdk';
-import { loadCategoryProducts, loadNodeProducts } from './service';
-import { useCategories, useTranslation, useCurrency, useNodes } from './app-state';
-import { ProductThumbnail } from './ProductThumbnail';
-import { createCategoryUrl } from './routes';
-import { Pagination } from './Pagination';
+import { loadNodeProducts } from './service';
+import { useTranslation, useCurrency, useNodes } from './app-state';
+// import { Pagination } from './Pagination';
 import { useResolve } from './hooks';
 
 import './Category.scss';
