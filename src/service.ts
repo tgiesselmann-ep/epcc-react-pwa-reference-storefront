@@ -270,6 +270,12 @@ export async function getProductById(productId: string): Promise<moltin.Product>
   return product
 }
 
+export async function getPcmProductById(productId: string): Promise<ProductResponse> {
+  const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
+  const result = await moltin.Catalog.Products.Get({ productId: productId });
+  return result.data;
+}
+
 export async function getProductsByIds(ids: string[]): Promise<any> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
   const productsRequests = ids.map(id => moltin.Products.Get(id));

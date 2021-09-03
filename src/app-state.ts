@@ -15,7 +15,9 @@ import {
   addCustomerAssociation,
   loadCustomerAuthenticationSettings,
   loadOidcProfiles,
-  loadNodes
+  loadNodes,
+  getPcmProductById,
+  loadImageHref
 } from './service';
 
 import { config } from './config';
@@ -450,10 +452,26 @@ function useCartItemsState() {
   const mcart = localStorage.getItem('mcart') || '';
   const [addedtItem, setAddedItem] = useState("");
 
+  const resolveImage = (item: any) => {
+    if(item?.image?.href === '') {
+      getPcmProductById(item.product_id).then((product: any) => {
+        if(product.relationships?.files?.data.length > 0) {
+          loadImageHref(product.relationships.files.data[0].id).then(imgHref => {
+            item.image.href = imgHref;
+          })
+        }
+      }).catch(error => {
+        console.error(error);
+      });
+    }
+    
+    return item;
+  }
+
   useEffect(() => {
     if (mcart) {
       getCartItems(mcart).then(res => {
-        setCartData(res.data.filter(({ type }) => type === 'cart_item' || type === 'custom_item'));
+        setCartData(res.data.filter(({ type }) => type === 'cart_item' || type === 'custom_item').map(resolveImage));
         setPromotionItems(res.data.filter(({ type }) => type === 'promotion_item'));
         setCount(res.data.reduce((sum, { quantity }) => sum + quantity, 0));
         setTotalPrice(res.meta.display_price.without_tax.formatted);
@@ -464,7 +482,7 @@ function useCartItemsState() {
   const updateCartItems = () => {
     const mcart = localStorage.getItem('mcart') || '';
     getCartItems(mcart).then(res => {
-      const cartData = res.data.length ? res.data.filter(({ type }) => type === 'cart_item' || type === 'custom_item') : [];
+      const cartData = res.data.length ? res.data.filter(({ type }) => type === 'cart_item' || type === 'custom_item').map(resolveImage) : [];
       setCartData(cartData);
       const promotionItems = res.data.length ? res.data.filter(({ type }) => type === 'promotion_item') : [];
       setPromotionItems(promotionItems);
