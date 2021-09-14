@@ -18,7 +18,7 @@ import './AppHeader.scss';
 
 export const AppHeader: React.FC = () => {
   const { t } = useTranslation();
-  const { count, cartQuantity, showCartPopup, updateCartItems, setOpenModal, openModal } = useCartData();
+  const { count, cartQuantity, showCartPopup, /*updateCartItems,*/ setOpenModal, openModal } = useCartData();
   const [newCart, setNewCart] = useState(false);
 
   const handleCloseCartModal = () => {
@@ -31,7 +31,7 @@ export const AppHeader: React.FC = () => {
 
   const handleCartModal = () => {
 
-    updateCartItems();
+    //updateCartItems();
     setOpenModal(true);
   };
 
