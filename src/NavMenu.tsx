@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { createCategoryUrl, createNodeUrl } from './routes';
+import { /*createCategoryUrl,*/ createNodeUrl } from './routes';
 import * as moltin from '@moltin/sdk';
-import { useCategories, useNodes } from './app-state';
+import { /*useCategories,*/ useNodes } from './app-state';
 
 import './NavMenu.scss';
 
@@ -13,18 +13,19 @@ interface NavMenuProps {
 }
 
 export const NavMenu: React.FC<NavMenuProps> = (props) => {
-  const { handleCloseNavigation, categoryHistory, handleCategoryClick } = props;
-  const { categoriesTree } = useCategories();
+  const { handleCloseNavigation, /*categoryHistory, handleCategoryClick*/ } = props;
+  // const { categoriesTree } = useCategories();
   const { nodes } = useNodes();
 
   const handleCloseMenu = () => {
     handleCloseNavigation();
   };
 
-  const handleShow = (category: moltin.Category) => {
-    handleCategoryClick(category.id, category.name);
-  };
+  // const handleShow = (category: moltin.Category) => {
+  //   handleCategoryClick(category.id, category.name);
+  // };
 
+  /*
   function renderCategories(categories: moltin.Category[], level: number = 0, isVisible: boolean = false): React.ReactElement {
     return (
       <ul className={`navmenu__sub --level-${level} ${isVisible ? '--show' : ''}`}>
@@ -44,10 +45,11 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
       </ul>
     );
   }
+  */
 
   return (
     <div className="navmenu">
-      {categoriesTree && renderCategories(categoriesTree)}
+      {/* {categoriesTree && renderCategories(categoriesTree)} */}
       {nodes && nodes.map((node: moltin.Node) => (
         // <div>{node.attributes.name}</div>
         <Link
