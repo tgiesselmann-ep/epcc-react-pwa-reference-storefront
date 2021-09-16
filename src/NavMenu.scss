@@ -49,11 +49,35 @@
       width: 100%;
     }
 
-    &.--level-1, &.--level-2, &.--level-3 {
+    &.--level-1 {
       .navmenu__link {
         height: 30px;
         color: $mainTextColor;
         margin-left: 60px;
+        text-transform: none;
+
+        &:hover {
+          color: $firstComplimentColor
+        }
+      }
+    }
+    &.--level-2 {
+      .navmenu__link {
+        height: 30px;
+        color: $mainTextColor;
+        margin-left: 80px;
+        text-transform: none;
+
+        &:hover {
+          color: $firstComplimentColor
+        }
+      }
+    }
+    &.--level-3 {
+      .navmenu__link {
+        height: 30px;
+        color: $mainTextColor;
+        margin-left: 100px;
         text-transform: none;
 
         &:hover {

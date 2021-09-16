@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import * as moltin from '@moltin/sdk';
-import { loadNodeProducts } from './service';
+import { loadNodeProducts, loadNodeBySlug } from './service';
 import { useTranslation, useCurrency, useNodes } from './app-state';
 // import { Pagination } from './Pagination';
 import { useResolve } from './hooks';
 
 import './Category.scss';
 import { PcmProductThumbnail } from './PcmProductThumbnail';
+import { APIErrorContext } from './APIErrorProvider';
 
 function useNodeProducts(nodeId: string | undefined, pageNum: number) {
   const { selectedLanguage } = useTranslation();
@@ -37,16 +38,28 @@ interface NodeParams {
 
 export const Node: React.FC = () => {
   const params = useParams<NodeParams>();
-  // TODO - map the node slug to a full path
-  const { nodes } = useNodes();
+  const nodeSlug = params.nodeSlug;
   const parsedPageNum = parseInt(params.pageNum!);
   const pageNum = isNaN(parsedPageNum) ? 1 : parsedPageNum;
+  const { selectedLanguage } = useTranslation();
+  const { selectedCurrency } = useCurrency();
+  const { addError } = useContext(APIErrorContext);
 
-  // TODO - make this safer
-  const filteredNodes = nodes ? nodes?.filter((n: moltin.Node) => { return n.attributes?.slug === params.nodeSlug }) : [];
-  const node = filteredNodes[0];
-
+  const [node] = useResolve(
+    async () => {
+      try {
+        return loadNodeBySlug(nodeSlug, selectedLanguage, selectedCurrency);
+      } catch (error) {
+        const e: any = error;
+        addError(e.errors);
+      }
+    },
+    [nodeSlug, selectedLanguage, selectedCurrency, addError]
+  );
+  
   const { products/*, totalPages */} = useNodeProducts(node?.id, pageNum);
+  
+
 
   return (
     <div className="category">

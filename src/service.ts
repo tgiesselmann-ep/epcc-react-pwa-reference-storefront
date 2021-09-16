@@ -51,7 +51,6 @@ export async function loadNodes(language: string): Promise<moltin.Node[]> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId, language });
   const result = await moltin.Catalog.Nodes.All();
 
-  // something
   return result.data;
 }
 
@@ -101,6 +100,25 @@ export async function loadNodeProducts(nodeId: string, pageNum: number, language
   // }
 
   return result;
+}
+
+export async function loadNodeBySlug(nodeSlug: string, language: string, currency: string): Promise<any> {
+  const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId, language, currency });
+
+  const resultSlug = await moltin.Catalog.Nodes
+    .Limit(1)
+    .Filter({
+      eq: {
+        slug: nodeSlug
+      }
+    })
+    .All();
+
+  const nodeId: any = resultSlug?.data[0]?.id;
+  const result = await moltin.Catalog.Nodes.Get({ nodeId: nodeId });
+  const node: any = result.data;
+
+  return node;
 }
 
 const imageHrefCache: { [key: string]: string } = {};

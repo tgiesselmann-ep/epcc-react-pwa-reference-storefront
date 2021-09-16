@@ -55,7 +55,8 @@ export const PcmProduct: React.FC = () => {
       try {
         return loadPcmProductBySlug(productSlug, selectedLanguage, selectedCurrency)
       } catch (error) {
-        addError(error.errors);
+        const e: any = error;
+        addError(e.errors);
       }
     },
     [productSlug, selectedLanguage, selectedCurrency, addError]
@@ -75,7 +76,8 @@ export const PcmProduct: React.FC = () => {
         return getProductById(childProduct)
       }
        catch (error) {
-        addError(error.errors);
+        const e: any = error;
+        addError(e.errors);
       }
     }, [childProduct, addError]
   )

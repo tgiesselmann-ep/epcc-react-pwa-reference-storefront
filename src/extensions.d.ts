@@ -22,4 +22,8 @@ declare module '@moltin/sdk' {
     weight: Weight;
   }
 
+  interface Node {
+    children?: Node[]
+  }
+
 }

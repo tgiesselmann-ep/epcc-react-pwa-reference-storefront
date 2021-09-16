@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import constate from 'constate';
 import * as moltin from '@moltin/sdk';
+import { Node as HierarchyNode } from '@moltin/sdk';
 import {
   getCustomer,
   getAddresses,
@@ -361,6 +362,26 @@ function useCategoriesState(selectedLanguage: string) {
   };
 }
 
+function _mkNodeTree(currentNode: HierarchyNode, nodes: HierarchyNode[]): HierarchyNode {
+  nodes.filter(node => node.relationships?.parent?.data?.id === currentNode.id).forEach(node => {
+    currentNode.children = currentNode.children ?? [];
+    currentNode.children.push(node);
+    _mkNodeTree(node, nodes);
+  });
+
+  return currentNode;
+}
+
+function createNodeTree(nodes: moltin.Node[]): moltin.Node[] {
+  const result: moltin.Node[] = [];  
+  
+  nodes.filter((node: any) => (node.relationships.parent === undefined) && node.relationships.hierarchy).forEach(node => {
+    result.push(_mkNodeTree(node, nodes));
+  });
+  
+  return result;
+}
+
 function useNodesState(selectedLanguage: string) {
   const [nodes, setNodes] = useState<moltin.Node[]>();
 
@@ -368,7 +389,7 @@ function useNodesState(selectedLanguage: string) {
     setNodes(undefined);
 
     loadNodes(selectedLanguage).then(result => {
-      setNodes(result);
+      setNodes(createNodeTree(result));
     }).catch((err) => {
       console.error(err)
     });

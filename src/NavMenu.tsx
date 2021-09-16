@@ -47,20 +47,28 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
   }
   */
 
+  function renderNodes(nodes: moltin.Node[] | undefined, level: number = 0, isVisible: boolean = false): React.ReactElement {
+    return (
+      <ul className={`navmenu__sub --level-${level} ${isVisible ? '--show' : ''}`}>
+        {nodes && nodes.map(node => (
+          <li key={node.id} className="navmenu__li">
+                  <Link
+                  onClick={handleCloseMenu}
+                  // className={`navmenu__link ${node.children ? '--haschildren' : ''}`}
+                  className={`navmenu__link`}
+                  to={createNodeUrl('' + node.attributes.slug)}>
+                    {node.attributes.name}
+                  </Link>
+                  {node.children && renderNodes(node.children, level + 1)}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   return (
     <div className="navmenu">
-      {/* {categoriesTree && renderCategories(categoriesTree)} */}
-      {nodes && nodes.map((node: moltin.Node) => (
-        // <div>{node.attributes.name}</div>
-        <Link
-        onClick={handleCloseMenu}
-        // className={`navmenu__link ${node.children ? '--haschildren' : ''}`}
-        className={`navmenu__link`}
-        to={createNodeUrl('' + node.attributes.slug)}
-      >
-        {node.attributes.name}
-      </Link>
-      ))}
+      {nodes && renderNodes(nodes[0]?.children)}
     </div>
   );
-};
+}
