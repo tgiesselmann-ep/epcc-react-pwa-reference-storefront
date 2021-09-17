@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import * as moltin from '@moltin/sdk';
+// import * as moltin from '@moltin/sdk';
 import { loadNodeProducts, loadNodeBySlug } from './service';
-import { useTranslation, useCurrency, useNodes } from './app-state';
+import { useTranslation, useCurrency, /*useNodes*/ } from './app-state';
 // import { Pagination } from './Pagination';
 import { useResolve } from './hooks';
 
