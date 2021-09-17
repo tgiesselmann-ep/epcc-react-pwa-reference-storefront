@@ -68,7 +68,7 @@ export const NavMenu: React.FC<NavMenuProps> = (props) => {
 
   return (
     <div className="navmenu">
-      {nodes && renderNodes(nodes[0]?.children)}
+      {nodes && renderNodes(nodes)}
     </div>
   );
 }

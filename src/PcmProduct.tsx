@@ -62,7 +62,7 @@ export const PcmProduct: React.FC = () => {
     [productSlug, selectedLanguage, selectedCurrency, addError]
   );
 
-  const [childProduct, setChildProduct] = useState<string>(product?.relationships.children ? product.relationships.children.data[0].id : "")
+  const [childProduct, setChildProduct] = useState<string>(product?.relationships?.children ? product.relationships.children.data[0].id : "")
 
   const handleVariationChange = (childID: string) => {
     setProductId(childID);
@@ -104,7 +104,7 @@ export const PcmProduct: React.FC = () => {
 
   useEffect(() => {
     if(product)
-      if(product.relationships.children) {
+      if(product.relationships?.children) {
         setChildProduct(product.relationships.children.data[0].id);
         setProductId(product.relationships.children.data[0].id)
         

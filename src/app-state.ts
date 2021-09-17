@@ -375,8 +375,13 @@ function _mkNodeTree(currentNode: HierarchyNode, nodes: HierarchyNode[]): Hierar
 function createNodeTree(nodes: moltin.Node[]): moltin.Node[] {
   const result: moltin.Node[] = [];  
   
-  nodes.filter((node: any) => (node.relationships.parent === undefined) && node.relationships.hierarchy).forEach(node => {
-    result.push(_mkNodeTree(node, nodes));
+  nodes.filter((node: any) => node.relationships.parent === undefined).forEach(node => {
+    const nodeTree: moltin.Node = _mkNodeTree(node, nodes);
+    if(config.includeTopHierarchies) {
+      result.push(nodeTree);
+    } else if(nodeTree.children) {
+      result.push(...nodeTree.children);
+    }
   });
   
   return result;
