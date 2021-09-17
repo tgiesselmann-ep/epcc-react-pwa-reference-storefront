@@ -33,5 +33,5 @@ export const config = {
   coveoApiKey: process.env.REACT_APP_COVEO_API_KEY || '',
   coveoSourceName: process.env.REACT_APP_COVEO_SOURCE_NAME || '',
   searchProvider: process.env.REACT_APP_SEARCH_PROVIDER|| 'algolia',
-  includeTopHierarchies: process.env.REACT_APP_INCLUDE_TOP_HIERARCHIES || true
+  includeTopHierarchies: process.env.REACT_APP_INCLUDE_TOP_HIERARCHIES || 'yes'
 };

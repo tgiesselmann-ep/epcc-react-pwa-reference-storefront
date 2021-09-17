@@ -362,6 +362,8 @@ function useCategoriesState(selectedLanguage: string) {
   };
 }
 
+const includeTopHierarchies = config.includeTopHierarchies;
+
 function _mkNodeTree(currentNode: HierarchyNode, nodes: HierarchyNode[]): HierarchyNode {
   nodes.filter(node => node.relationships?.parent?.data?.id === currentNode.id).forEach(node => {
     currentNode.children = currentNode.children ?? [];
@@ -377,7 +379,7 @@ function createNodeTree(nodes: moltin.Node[]): moltin.Node[] {
   
   nodes.filter((node: any) => node.relationships.parent === undefined).forEach(node => {
     const nodeTree: moltin.Node = _mkNodeTree(node, nodes);
-    if(config.includeTopHierarchies) {
+    if(includeTopHierarchies === 'yes') {
       result.push(nodeTree);
     } else if(nodeTree.children) {
       result.push(...nodeTree.children);
