@@ -301,6 +301,13 @@ export async function getProductsByIds(ids: string[]): Promise<any> {
   return products.map(product => product.data)
 }
 
+export async function getPcmProductsByIds(ids: string[]): Promise<any> {
+  const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
+  const productsRequests = ids.map(id => moltin.Catalog.Products.Get({ productId: id }));
+  const products = await Promise.all(productsRequests);
+  return products.map(product => product.data)
+}
+
 export async function getCartItems(reference: string): Promise<moltin.CartItemsResponse> {
   const moltin = MoltinGateway({ host: config.endpointURL, client_id: config.clientId });
   const CartItems = await moltin.Cart(reference).Items();

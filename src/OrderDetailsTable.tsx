@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductMainImage } from "./ProductMainImage";
 import { useTranslation, useCartData, useMultiCartData, useCurrency } from "./app-state";
 import { useResolve } from "./hooks";
-import { getProductsByIds , bulkAdd } from "./service";
+import { getProductsByIds , bulkAdd, getPcmProductsByIds } from "./service";
 import { APIErrorContext } from "./APIErrorProvider";
 
 import "./OrderDetailsTable.scss";
@@ -44,7 +44,7 @@ export const OrderDetailsTable: React.FC<OrderDetailsTableParams> = ({
           (acum = [...acum, orderProduct.product_id]),
         []
       );
-      const products: moltin.Product[] = await getProductsByIds(ids);
+      const products: moltin.Product[] = await getPcmProductsByIds(ids);
       return orderProducts.map((item: moltin.OrderItem) => ({
         ...item,
         productData: products.find((product) => product.id === item.product_id),
