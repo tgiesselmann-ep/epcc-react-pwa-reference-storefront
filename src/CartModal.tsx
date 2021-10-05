@@ -93,7 +93,8 @@ export const CartModal: React.FC<CartModalParams> = (props) => {
       setRoute('completed');
       setIsSameAddress(true);
     } catch (err) {
-      addError(err.errors);
+      const e: any = err;
+      addError(e.errors);
       console.error(err)
     }
   };

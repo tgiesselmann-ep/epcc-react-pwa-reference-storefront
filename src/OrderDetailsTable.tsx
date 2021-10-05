@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ProductMainImage } from "./ProductMainImage";
 import { useTranslation, useCartData, useMultiCartData, useCurrency } from "./app-state";
 import { useResolve } from "./hooks";
-import { getProductsByIds , bulkAdd, getPcmProductsByIds } from "./service";
+import { bulkAdd, getPcmProductsByIds } from "./service";
 import { APIErrorContext } from "./APIErrorProvider";
 
 import "./OrderDetailsTable.scss";
@@ -50,7 +50,8 @@ export const OrderDetailsTable: React.FC<OrderDetailsTableParams> = ({
         productData: products.find((product) => product.id === item.product_id),
       }));
     } catch (error) {
-      addError(error.errors);
+      const e: any = error;
+      addError(e.errors);
     }
   }, [orderData, addError, orderItems]);
 
